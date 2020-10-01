@@ -1,0 +1,64 @@
+@import "./fonts.scss";
+@import "./colors.scss";
+
+body {
+  background-color: $mishka;
+  margin: 50px 0;
+  padding: 0;
+}
+
+.root {
+  font-family: $montserrat;
+  color: $mortar;
+
+  h1 {
+    text-align: center;
+  }
+
+  .primary-button {
+    color: $mishka;
+    font-family: $montserrat;
+    background: linear-gradient(145deg, #5a4c5f, #4c4050);
+    box-shadow: 2px 2px 13px #493e4d, 13px 13px 55px #5f5065;
+    border-radius: 10px;
+    border: 0;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .styled-input {
+    font-family: $montserrat;
+    border-radius: 10px;
+    min-width: 60%;
+    border: 0;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: inset 8px 8px 8px #dcd7d9, inset -8px -8px 8px #ffffff;
+
+    &::placeholder {
+      color: #c4c4c4;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 2px $mishka;
+    }
+  }
+
+  .player {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 90vw;
+    height: 56vw;
+    max-width: 500px;
+    max-height: 300px;
+    margin: 10px;
+    background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
+    box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+  }
+}
