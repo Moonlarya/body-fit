@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { AddPlaylist } from "../pages";
+import { AddPlaylist, CreatePlayList } from "../pages";
 
 import "./styles.scss";
 
@@ -10,9 +10,8 @@ const App: FC<{}> = () => {
     <div className="root">
       <Router>
         <Switch>
-          <Route path="/">
-            <AddPlaylist />
-          </Route>
+          <Route exact path="/" component={AddPlaylist} />
+          <Route path="/new-playlist" component={CreatePlayList} />
         </Switch>
       </Router>
     </div>

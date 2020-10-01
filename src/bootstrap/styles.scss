@@ -44,19 +44,7 @@ body {
 
       .workout-block {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-
-        .player {
-          border-radius: 10px;
-          overflow: hidden;
-          /*width: 90vw;
-      height: 56vw;*/
-          max-width: 500px;
-          max-height: 300px;
-          margin: 10px;
-          background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
-          box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
-        }
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       }
     }
   }
@@ -99,4 +87,16 @@ h2 {
   &:focus {
     outline: none;
   }
+}
+
+.player {
+  border-radius: 10px;
+  overflow: hidden;
+  /*width: 90vw;
+height: 56vw;*/
+  max-width: 500px;
+  max-height: 300px;
+  margin: 10px;
+  background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
+  box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
 }

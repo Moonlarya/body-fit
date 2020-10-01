@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import cheerio from "cheerio";
 import ReactPlayer from "react-player";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 
 import Footer from "components/Footer";
+
+import "./styles.scss";
 
 interface IFormFields {
   url: string;
@@ -16,7 +18,41 @@ class AddPlaylist extends Component {
   state = {
     url: [],
     data: null,
+    program: [],
   };
+
+  async componentDidMount() {
+    const BASE_URL = "https://www.chloeting.com/program/";
+
+    const response = await axios.get(BASE_URL);
+
+    if (response.status === 200) {
+      const html = response.data;
+      const $ = cheerio.load(html);
+
+      const programSelector = $(".programs-list")
+        .find("a")
+        .get()
+        .map((link) => BASE_URL + $(link).attr("href"));
+
+      const program = programSelector.map((el) => {
+        const nameFormatted = el
+          .split(/[/ .]+/)
+          .slice(-2, -1)
+          .toString()
+          .replace(/-/g, " ");
+
+        const name = nameFormatted[0].toUpperCase() + nameFormatted.slice(1);
+
+        return {
+          name,
+          link: el,
+        };
+      });
+
+      this.setState({ program });
+    }
+  }
 
   loadInfo = async () => {
     const { url } = this.state;
@@ -65,8 +101,9 @@ class AddPlaylist extends Component {
     this.setState({ url: values.url });
     await this.loadInfo();
   };
+
   render() {
-    const { data } = this.state;
+    const { data, program } = this.state;
 
     return (
       <>
@@ -84,16 +121,26 @@ class AddPlaylist extends Component {
               handleBlur,
               handleSubmit,
             }) => (
-              <form onSubmit={handleSubmit} className="link-form">
-                <input
+              <form
+                onSubmit={handleSubmit}
+                className="link-form add-playlist-select"
+              >
+                <Field
+                  as="select"
                   className="styled-input"
-                  type="text"
                   name="url"
-                  placeholder="Insert your link here"
+                  placeholder="Choose training"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.url}
-                />
+                >
+                  {program &&
+                    program.map((el, index) => (
+                      <option value={el.link} key={index}>
+                        {el.name}
+                      </option>
+                    ))}
+                </Field>
                 {errors.url && touched.url && errors.url}
                 <button type="submit" className="primary-button">
                   Go!
