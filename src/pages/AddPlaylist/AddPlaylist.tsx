@@ -4,6 +4,8 @@ import cheerio from "cheerio";
 import ReactPlayer from "react-player";
 import { Formik } from "formik";
 
+import Footer from "components/Footer";
+
 interface IFormFields {
   url: string;
 }
@@ -67,64 +69,67 @@ class AddPlaylist extends Component {
     const { data } = this.state;
 
     return (
-      <div className="wrapper">
-        <h1>Let's get better!</h1>
-        <Formik
-          initialValues={AddPlaylist.initialValues}
-          onSubmit={this.onSubmit}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          }) => (
-            <form onSubmit={handleSubmit} className="link-form">
-              <input
-                className="styled-input"
-                type="text"
-                name="url"
-                placeholder="Insert your link here"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.url}
-              />
-              {errors.url && touched.url && errors.url}
-              <button type="submit" className="primary-button">
-                Go!
-              </button>
-            </form>
-          )}
-        </Formik>
+      <>
+        <div className="wrapper">
+          <h1>Let's get better!</h1>
+          <Formik
+            initialValues={AddPlaylist.initialValues}
+            onSubmit={this.onSubmit}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form onSubmit={handleSubmit} className="link-form">
+                <input
+                  className="styled-input"
+                  type="text"
+                  name="url"
+                  placeholder="Insert your link here"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.url}
+                />
+                {errors.url && touched.url && errors.url}
+                <button type="submit" className="primary-button">
+                  Go!
+                </button>
+              </form>
+            )}
+          </Formik>
 
-        {data &&
-          data.map((el, index) => {
-            return (
-              <div key={index} className="workout-plan">
-                <div className="workout-title">
-                  <h2>{el.title}</h2>
-                  <span className="subtitle">{el.subtitle}</span>
+          {data &&
+            data.map((el, index) => {
+              return (
+                <div key={index} className="workout-plan">
+                  <div className="workout-title">
+                    <h2>{el.title}</h2>
+                    <span className="subtitle">{el.subtitle}</span>
+                  </div>
+                  <div className="workout-block">
+                    {el.url &&
+                      el.url.map((url, index) => (
+                        <div className="player">
+                          <ReactPlayer
+                            key={index}
+                            url={url}
+                            width="100%"
+                            height="100%"
+                            controls
+                          />
+                        </div>
+                      ))}
+                  </div>
                 </div>
-                <div className="workout-block">
-                  {el.url &&
-                    el.url.map((url, index) => (
-                      <div className="player">
-                        <ReactPlayer
-                          key={index}
-                          url={url}
-                          width="100%"
-                          height="100%"
-                          controls
-                        />
-                      </div>
-                    ))}
-                </div>
-              </div>
-            );
-          })}
-      </div>
+              );
+            })}
+        </div>
+        <Footer />
+      </>
     );
   }
 }

@@ -1,0 +1,56 @@
+@import "../../bootstrap/colors.scss";
+@import "../../bootstrap/fonts.scss";
+
+.footer-wrapper {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  .footer {
+    height: 90px;
+    width: 100%;
+    background-color: $mishka;
+    box-shadow: 8px 8px 8px #dcd7d9, -8px -8px 8px #ffffff;
+  }
+
+  .footer-button-wrapper {
+    position: absolute;
+    width: 90px;
+    top: -30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    .footer-button {
+      color: $mishka;
+      font-family: $montserrat;
+      font-size: $large;
+      background: linear-gradient(145deg, #5a4c5f, #4c4050);
+      box-shadow: 2px 2px 13px #493e4d, 13px 13px 55px #5f5065;
+      border-radius: 100px;
+      border: 0;
+      padding: 3px 20px;
+      margin: 10px;
+      cursor: pointer;
+      position: absolute;
+      left: 1px;
+      z-index: 3;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .footer-button-lining {
+      background: linear-gradient(0deg, #d4d1d5 0%, #ffffff 100%);
+      border-radius: 0 0 45% 40%/0 0 75% 73%;
+      border: 0;
+      padding: 28px 45px;
+      position: absolute;
+      top: 30px;
+      left: -4px;
+      z-index: 2;
+    }
+  }
+}
