@@ -14,7 +14,6 @@
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
     "formik": "^2.1.6",
-    "fs": "^0.0.1-security",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-player": "^2.6.2",

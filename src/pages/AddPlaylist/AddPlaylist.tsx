@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import cheerio from "cheerio";
-import fs from "fs";
 import ReactPlayer from "react-player";
 import { Formik } from "formik";
 
@@ -45,7 +44,6 @@ class AddPlaylist extends Component {
       });
     }
 
-    console.log(devtoList);
     this.setState({ data: devtoList });
   };
 
@@ -71,7 +69,7 @@ class AddPlaylist extends Component {
             handleBlur,
             handleSubmit,
           }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="link-form">
               <input
                 className="styled-input"
                 type="text"
@@ -92,20 +90,22 @@ class AddPlaylist extends Component {
         {data &&
           data.map((el, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="workout-plan">
                 <h2>{el.title}</h2>
-                {el.url &&
-                  el.url.map((url, index) => (
-                    <div className="player">
-                      <ReactPlayer
-                        key={index}
-                        url={url}
-                        width="100%"
-                        height="100%"
-                        controls
-                      />
-                    </div>
-                  ))}
+                <div className="workout-block">
+                  {el.url &&
+                    el.url.map((url, index) => (
+                      <div className="player">
+                        <ReactPlayer
+                          key={index}
+                          url={url}
+                          width="100%"
+                          height="100%"
+                          controls
+                        />
+                      </div>
+                    ))}
+                </div>
               </div>
             );
           })}

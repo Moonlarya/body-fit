@@ -11,8 +11,14 @@ body {
   font-family: $montserrat;
   color: $mortar;
 
-  h1 {
+  h1,
+  h2 {
     text-align: center;
+  }
+
+  .link-form {
+    margin: 0 auto;
+    width: 80%;
   }
 
   .primary-button {
@@ -34,7 +40,7 @@ body {
   .styled-input {
     font-family: $montserrat;
     border-radius: 10px;
-    min-width: 60%;
+    width: 80%;
     border: 0;
     padding: 10px;
     margin: 10px;
@@ -50,15 +56,25 @@ body {
     }
   }
 
-  .player {
-    border-radius: 10px;
-    overflow: hidden;
-    width: 90vw;
-    height: 56vw;
-    max-width: 500px;
-    max-height: 300px;
-    margin: 10px;
-    background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
-    box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+  .workout-plan {
+    margin: 20px auto;
+    width: 90%;
+
+    .workout-block {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+      .player {
+        border-radius: 10px;
+        overflow: hidden;
+        /*width: 90vw;
+      height: 56vw;*/
+        max-width: 500px;
+        max-height: 300px;
+        margin: 10px;
+        background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
+        box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+      }
+    }
   }
 }
