@@ -34,12 +34,6 @@ body {
         align-content: center;
         width: max-content;
         margin: 0 auto 30px;
-
-        .subtitle {
-          color: #727171;
-          font-size: $small;
-          font-weight: $light;
-        }
       }
 
       .workout-block {
@@ -99,4 +93,27 @@ height: 56vw;*/
   margin: 10px;
   background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
   box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+}
+
+.fixed-center-down {
+  position: fixed;
+  font-size: $medium;
+  font-weight: $bold;
+  text-transform: uppercase;
+  z-index: 3;
+  width: max-content;
+  bottom: 130px;
+  right: 0;
+  left: -10px;
+  margin: auto;
+}
+
+.subtitle {
+  color: #727171;
+  font-size: $small;
+  font-weight: $light;
+}
+
+.text-center {
+  text-align: center;
 }

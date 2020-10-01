@@ -107,6 +107,10 @@ class AddPlaylist extends Component {
       <>
         <div className="wrapper">
           <h1>Let's get better!</h1>
+          <p className="subtitle text-center">
+            Choose workout program and let's start!
+          </p>
+          <button className="primary-button">Chloe Ting</button>
           <Formik
             initialValues={AddPlaylist.initialValues}
             onSubmit={this.onSubmit}

@@ -23,6 +23,9 @@ class CreatePlayList extends Component {
     return (
       <>
         <h1>Take it yourself!</h1>
+        <p className="subtitle text-center">
+          You can create your own workout program
+        </p>
         <div className="wrapper">
           <Formik
             initialValues={CreatePlayList.initialValues}
@@ -67,6 +70,14 @@ class CreatePlayList extends Component {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="fixed-center-down">
+            <input
+              className="styled-input"
+              type="text"
+              placeholder="Name of your playlist"
+            />
+            <button className="primary-button">Save</button>
           </div>
         </div>
       </>

@@ -1,4 +1,7 @@
 import AddPlaylist from "./AddPlaylist";
 import CreatePlayList from "./CreatePlayList";
+import Meals from "./Meals";
+import Tracking from "./Tracking";
+import MyWorkouts from "./MyWorkouts";
 
-export { AddPlaylist, CreatePlayList };
+export { AddPlaylist, CreatePlayList, Meals, Tracking, MyWorkouts };
