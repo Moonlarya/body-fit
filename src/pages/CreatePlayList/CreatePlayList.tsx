@@ -1,4 +1,3 @@
-import Footer from "components/Footer";
 import { Formik } from "formik";
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
@@ -70,7 +69,6 @@ class CreatePlayList extends Component {
             </div>
           </div>
         </div>
-        <Footer />
       </>
     );
   }

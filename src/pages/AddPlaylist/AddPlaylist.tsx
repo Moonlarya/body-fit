@@ -4,8 +4,6 @@ import cheerio from "cheerio";
 import ReactPlayer from "react-player";
 import { Field, Formik } from "formik";
 
-import Footer from "components/Footer";
-
 import "./styles.scss";
 
 interface IFormFields {
@@ -175,7 +173,6 @@ class AddPlaylist extends Component {
               );
             })}
         </div>
-        <Footer />
       </>
     );
   }
