@@ -11,70 +11,92 @@ body {
   font-family: $montserrat;
   color: $mortar;
 
-  h1,
-  h2 {
-    text-align: center;
-  }
-
-  .link-form {
-    margin: 0 auto;
-    width: 80%;
-  }
-
-  .primary-button {
-    color: $mishka;
-    font-family: $montserrat;
-    background: linear-gradient(145deg, #5a4c5f, #4c4050);
-    box-shadow: 2px 2px 13px #493e4d, 13px 13px 55px #5f5065;
-    border-radius: 10px;
-    border: 0;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  .styled-input {
-    font-family: $montserrat;
-    border-radius: 10px;
-    width: 80%;
-    border: 0;
-    padding: 10px;
-    margin: 10px;
-    box-shadow: inset 8px 8px 8px #dcd7d9, inset -8px -8px 8px #ffffff;
-
-    &::placeholder {
-      color: #c4c4c4;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0px 0px 2px $mishka;
-    }
-  }
-
-  .workout-plan {
-    margin: 20px auto;
+  .wrapper {
     width: 90%;
+    margin: 0 auto;
 
-    .workout-block {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-      .player {
-        border-radius: 10px;
-        overflow: hidden;
-        /*width: 90vw;
-      height: 56vw;*/
-        max-width: 500px;
-        max-height: 300px;
-        margin: 10px;
-        background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
-        box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+    .link-form {
+      display: flex;
+      .styled-input {
+        width: 100%;
+      }
+      .primary-button {
+        width: max-content;
       }
     }
+
+    .workout-plan {
+      margin: 20px auto;
+
+      .workout-title {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        width: max-content;
+        margin: 0 auto 30px;
+
+        .subtitle {
+          color: #727171;
+          font-size: $small;
+          font-weight: $light;
+        }
+      }
+
+      .workout-block {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+        .player {
+          border-radius: 10px;
+          overflow: hidden;
+          /*width: 90vw;
+      height: 56vw;*/
+          max-width: 500px;
+          max-height: 300px;
+          margin: 10px;
+          background: linear-gradient(145deg, #fdf8fe, #d4d1d5);
+          box-shadow: 6px 6px 15px #cdcace, -15px -15px 15px #ffffff;
+        }
+      }
+    }
+  }
+}
+
+.styled-input {
+  font-family: $montserrat;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: inset 8px 8px 8px #dcd7d9, inset -8px -8px 8px #ffffff;
+
+  &::placeholder {
+    color: #c4c4c4;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px $mishka;
+  }
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+.primary-button {
+  color: $mishka;
+  font-family: $montserrat;
+  background: linear-gradient(145deg, #5a4c5f, #4c4050);
+  box-shadow: 2px 2px 13px #493e4d, 13px 13px 55px #5f5065;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
   }
 }

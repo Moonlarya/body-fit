@@ -27,19 +27,31 @@ class AddPlaylist extends Component {
       const html = response.data;
       const $ = cheerio.load(html);
 
-      $(".cal-entry").each(function (i, elem) {
+      $(".cal-entry").each(function (i) {
+        const generalTitle = $(this)
+          .children(".info")
+          .text()
+          .replace(/(\r\n|\n|\r)/gm, "");
+
         devtoList[i] = {
-          title: $(this)
-            .children(".info")
-            .text()
-            .replace(/(\r\n|\n|\r)/gm, ""),
+          title: generalTitle
+            .trim()
+            .split(" ")
+            .slice(0, 2)
+            .filter(Boolean)
+            .join(" "),
+          subtitle: generalTitle
+            .trim()
+            .split(" ")
+            .slice(2)
+            .filter(Boolean)
+            .join(" "),
           url: $(this)
             .children(".videos")
             .find("a")
             .get()
             .map((link) => $(link).attr("href")),
         };
-
         return devtoList;
       });
     }
@@ -47,15 +59,15 @@ class AddPlaylist extends Component {
     this.setState({ data: devtoList });
   };
 
-  onSubmit = (values: IFormFields) => {
+  onSubmit = async (values: IFormFields) => {
     this.setState({ url: values.url });
-    this.loadInfo();
+    await this.loadInfo();
   };
   render() {
     const { data } = this.state;
 
     return (
-      <>
+      <div className="wrapper">
         <h1>Let's get better!</h1>
         <Formik
           initialValues={AddPlaylist.initialValues}
@@ -91,7 +103,10 @@ class AddPlaylist extends Component {
           data.map((el, index) => {
             return (
               <div key={index} className="workout-plan">
-                <h2>{el.title}</h2>
+                <div className="workout-title">
+                  <h2>{el.title}</h2>
+                  <span className="subtitle">{el.subtitle}</span>
+                </div>
                 <div className="workout-block">
                   {el.url &&
                     el.url.map((url, index) => (
@@ -109,7 +124,7 @@ class AddPlaylist extends Component {
               </div>
             );
           })}
-      </>
+      </div>
     );
   }
 }
