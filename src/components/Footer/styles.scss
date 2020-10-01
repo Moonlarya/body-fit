@@ -12,6 +12,22 @@
     width: 100%;
     background-color: $mishka;
     box-shadow: 8px 8px 8px #dcd7d9, -8px -8px 8px #ffffff;
+    display: flex;
+    justify-content: space-around;
+
+    .footer-images {
+      height: 50px;
+      width: 8%;
+      margin: 20px 0;
+    }
+
+    .margin-right {
+      margin-right: 50px;
+    }
+
+    .margin-left {
+      margin-left: 50px;
+    }
   }
 
   .footer-button-wrapper {
