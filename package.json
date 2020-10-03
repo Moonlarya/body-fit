@@ -60,5 +60,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{css,scss,json,md}": "prettier --write",
+    "*.{ts,tsx,js,jsx}": [
+      "npx eslint",
+      "prettier --write"
+    ]
   }
 }
