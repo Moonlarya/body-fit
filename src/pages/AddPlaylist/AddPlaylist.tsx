@@ -1,108 +1,38 @@
 import React, { Component } from "react";
-import axios from "axios";
-import cheerio from "cheerio";
 import ReactPlayer from "react-player";
 import { Field, Formik } from "formik";
+import { connect } from "react-redux";
 
-import "./styles.scss";
+import {
+  loadDataFromProgramLink,
+  loadProgramLinks,
+} from "redux/actions/workoutProgram";
 
 interface IFormFields {
   url: string;
 }
 
-class AddPlaylist extends Component {
+interface IAddPlaylistProps {
+  loadProgramLinks: () => Promise<void>;
+  loadDataFromProgramLink: (url: string) => Promise<void>;
+  programs: any;
+  data: any;
+}
+
+class AddPlaylist extends Component<IAddPlaylistProps> {
   private static initialValues: IFormFields = { url: "" };
 
-  state = {
-    url: [],
-    data: null,
-    program: [],
-  };
-
-  async componentDidMount() {
-    const BASE_URL = "https://www.chloeting.com/program/";
-
-    const response = await axios.get(BASE_URL);
-
-    if (response.status === 200) {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      const programSelector = $(".programs-list")
-        .find("a")
-        .get()
-        .map((link) => BASE_URL + $(link).attr("href"));
-
-      const program = programSelector.map((el) => {
-        const nameFormatted = el
-          .split(/[/ .]+/)
-          .slice(-2, -1)
-          .toString()
-          .replace(/-/g, " ");
-
-        const name = nameFormatted[0].toUpperCase() + nameFormatted.slice(1);
-
-        return {
-          name,
-          link: el,
-        };
-      });
-
-      this.setState({ program });
-    }
+  componentDidMount() {
+    const { loadProgramLinks } = this.props;
+    loadProgramLinks();
   }
 
-  loadInfo = async () => {
-    const { url } = this.state;
-
-    let devtoList = [];
-
-    const response = await axios.get(url.toString());
-
-    if (response.status === 200) {
-      const html = response.data;
-      const $ = cheerio.load(html);
-
-      $(".cal-entry").each(function (i) {
-        const generalTitle = $(this)
-          .children(".info")
-          .text()
-          .replace(/(\r\n|\n|\r)/gm, "");
-
-        devtoList[i] = {
-          title: generalTitle
-            .trim()
-            .split(" ")
-            .slice(0, 2)
-            .filter(Boolean)
-            .join(" "),
-          subtitle: generalTitle
-            .trim()
-            .split(" ")
-            .slice(2)
-            .filter(Boolean)
-            .join(" "),
-          url: $(this)
-            .children(".videos")
-            .find("a")
-            .get()
-            .map((link) => $(link).attr("href")),
-        };
-        return devtoList;
-      });
-    }
-
-    this.setState({ data: devtoList });
-  };
-
   onSubmit = async (values: IFormFields) => {
-    this.setState({ url: values.url });
-    await this.loadInfo();
+    await this.props.loadDataFromProgramLink(values.url);
   };
 
   render() {
-    const { data, program } = this.state;
-
+    const { programs, data } = this.props;
     return (
       <>
         <div className="wrapper">
@@ -136,8 +66,12 @@ class AddPlaylist extends Component {
                   onBlur={handleBlur}
                   value={values.url}
                 >
-                  {program &&
-                    program.map((el, index) => (
+                  <option value="" selected disabled hidden>
+                    Choose here
+                  </option>
+                  {programs &&
+                    programs.map((el, index) => (
+                      // eslint-disable-next-line
                       <option value={el.link} key={index}>
                         {el.name}
                       </option>
@@ -154,6 +88,7 @@ class AddPlaylist extends Component {
           {data &&
             data.map((el, index) => {
               return (
+                // eslint-disable-next-line
                 <div key={index} className="workout-plan">
                   <div className="workout-title">
                     <h2>{el.title}</h2>
@@ -164,6 +99,7 @@ class AddPlaylist extends Component {
                       el.url.map((url, index) => (
                         <div className="player">
                           <ReactPlayer
+                            // eslint-disable-next-line
                             key={index}
                             url={url}
                             width="100%"
@@ -182,4 +118,11 @@ class AddPlaylist extends Component {
   }
 }
 
-export default AddPlaylist;
+const mapStateToProps = (state) => ({
+  programs: state.workoutData.programs,
+  data: state.workoutData.data,
+});
+
+const mapDispatchToProps = { loadProgramLinks, loadDataFromProgramLink };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlaylist);

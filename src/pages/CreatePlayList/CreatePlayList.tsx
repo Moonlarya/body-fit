@@ -1,24 +1,32 @@
-import { Formik } from "formik";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import ReactPlayer from "react-player";
 
-interface IFormFields {
-  url: string;
-}
+import addWorkout from "../../redux/actions/ownWorkout";
 
-class CreatePlayList extends Component {
-  private static initialValues: IFormFields = { url: "" };
+import DayForm from "./DayForm";
 
-  state = {
-    url: [],
+import { ICreatePlayList, IState, ISavingFormFIelds } from "./types";
+
+class CreatePlayList extends Component<ICreatePlayList, IState> {
+  private static initialValuesForSavingForm: ISavingFormFIelds = {
+    name: "",
   };
 
-  onSubmit = async (values: IFormFields) => {
-    this.setState({ url: [...this.state.url, values.url] });
+  state: IState = {
+    dayCount: 0,
+    workoutDaysData: [],
+  };
+
+  handleAddDay = (workoutDayData: IWorkoutDay) => {
+    this.setState((state) => ({
+      workoutDaysData: [...state.workoutDaysData, workoutDayData],
+      dayCount: state.dayCount + 1,
+    }));
   };
 
   render() {
-    const { url } = this.state;
+    const { workoutDaysData, dayCount } = this.state;
 
     return (
       <>
@@ -26,63 +34,38 @@ class CreatePlayList extends Component {
         <p className="subtitle text-center">
           You can create your own workout program
         </p>
+        <DayForm dayNumber={dayCount + 1} onSave={this.handleAddDay} />
         <div className="wrapper">
-          <Formik
-            initialValues={CreatePlayList.initialValues}
-            onSubmit={this.onSubmit}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => (
-              <form onSubmit={handleSubmit} className="link-form">
-                <input
-                  className="styled-input"
-                  type="text"
-                  name="url"
-                  placeholder="Insert your link here"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.url}
-                />
-                {errors.url && touched.url && errors.url}
-                <button type="submit" className="primary-button">
-                  Go!
-                </button>
-              </form>
-            )}
-          </Formik>
           <div className="workout-plan">
-            <div className="workout-block">
-              {url.map((url, index) => (
-                <div className="player">
-                  <ReactPlayer
-                    key={index}
-                    url={url}
-                    width="100%"
-                    height="100%"
-                    controls
-                  />
+            {workoutDaysData.map((el, index) => (
+              <div key={el.day}>
+                <h1>Day {el.day}</h1>
+                <div className="workout-block">
+                  {el.workout.map((url) => (
+                    <div className="player">
+                      <ReactPlayer
+                        // eslint-disable-next-line
+                        key={index}
+                        url={url}
+                        width="100%"
+                        height="100%"
+                        controls
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="fixed-center-down">
-            <input
-              className="styled-input"
-              type="text"
-              placeholder="Name of your playlist"
-            />
-            <button className="primary-button">Save</button>
+              </div>
+            ))}
           </div>
         </div>
       </>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  ownWorkout: state.ownWorkoutPrograms.ownWorkout,
+});
 
-export default CreatePlayList;
+const mapDispatchToProps = { addWorkout };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePlayList);
