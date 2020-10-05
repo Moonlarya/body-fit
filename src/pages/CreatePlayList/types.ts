@@ -8,9 +8,6 @@ export interface ICreatePlayList {
 }
 
 export interface IState {
-  isEditing: boolean;
-  // urlList: string[];
   dayCount: number;
   workoutDaysData: IWorkoutDay[];
-  // inputUrl: string;
 }
