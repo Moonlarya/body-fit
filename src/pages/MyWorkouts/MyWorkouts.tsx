@@ -3,6 +3,7 @@ import { Field, Formik } from "formik";
 import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import ReactPlayer from "react-player";
+import { createSelector } from "reselect";
 
 import { setWorkoutName } from "../../redux/actions/ownWorkout";
 
@@ -11,6 +12,14 @@ interface IMyWorkoutsProps {
   selectedWorkout: IWorkout;
   setWorkoutName: (name: string) => void;
 }
+
+const selectedWorkoutSelector = createSelector(
+  (state: any) => state.ownWorkoutPrograms,
+  (workouts) =>
+    workouts.ownWorkout.find(
+      (el: IWorkout) => el.name === workouts.selectedWorkoutName
+    )
+);
 
 class MyWorkouts extends Component<IMyWorkoutsProps> {
   private initialValues = { name: this.props.selectedWorkout?.name || "" };
@@ -100,9 +109,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
 }
 const mapStateToProps = (state) => ({
   ownWorkout: state.ownWorkoutPrograms.ownWorkout,
-  selectedWorkout: state.ownWorkoutPrograms.ownWorkout.find(
-    (el) => el.name === state.ownWorkoutPrograms.selectedWorkoutName
-  ),
+  selectedWorkout: selectedWorkoutSelector,
 });
 
 const mapDispatchToProps = { setWorkoutName };
