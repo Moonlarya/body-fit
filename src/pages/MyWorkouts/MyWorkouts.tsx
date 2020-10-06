@@ -81,25 +81,27 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
           <div className="workout-title">
             <h1>{selectedWorkout?.name}</h1>
           </div>
-          <div className="workout-block">
+          <div className="workout-plan">
             {selectedWorkout?.data.map((dayWorkout, index) => (
-              <div className="workout-plan">
+              <>
                 <h2>DAY {dayWorkout.day}</h2>
-                {dayWorkout.workout.map((workout) => (
-                  <div className="player">
-                    <LazyLoad>
-                      <ReactPlayer
-                        // eslint-disable-next-line
-                        key={index}
-                        url={workout}
-                        width="100%"
-                        height="100%"
-                        controls
-                      />
-                    </LazyLoad>
-                  </div>
-                ))}
-              </div>
+                <div className="workout-block">
+                  {dayWorkout.workout.map((workout) => (
+                    <div className="player">
+                      <LazyLoad>
+                        <ReactPlayer
+                          // eslint-disable-next-line
+                          key={index}
+                          url={workout}
+                          width="100%"
+                          height="100%"
+                          controls
+                        />
+                      </LazyLoad>
+                    </div>
+                  ))}
+                </div>
+              </>
             ))}
           </div>
         </div>
@@ -109,7 +111,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
 }
 const mapStateToProps = (state) => ({
   ownWorkout: state.ownWorkoutPrograms.ownWorkout,
-  selectedWorkout: selectedWorkoutSelector,
+  selectedWorkout: selectedWorkoutSelector(state),
 });
 
 const mapDispatchToProps = { setWorkoutName };
