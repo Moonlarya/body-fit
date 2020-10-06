@@ -46,8 +46,8 @@ class DayForm extends React.Component<
 
     return (
       <>
-        <div className="link-form add-playlist-select">
-          <h2>Adding for day {dayNumber}</h2>
+        <h2>Adding for day {dayNumber}</h2>
+        <div className="justify-center-wrap">
           <input
             className="styled-input"
             value={urlInput}
@@ -55,7 +55,7 @@ class DayForm extends React.Component<
               this.setState({ urlInput: event.target.value })
             }
           />
-          <button className="primary-button" onClick={this.handleAddUrl}>
+          <button className="secondary-button" onClick={this.handleAddUrl}>
             Add url
           </button>
           <button className="primary-button" onClick={this.handleSaveDay}>

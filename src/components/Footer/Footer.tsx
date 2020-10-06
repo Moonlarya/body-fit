@@ -12,7 +12,12 @@ import "./styles.scss";
 
 const Footer: FC<{}> = () => {
   return (
-    <div className="footer-wrapper">
+    <div
+      className="footer-wrapper"
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+    >
       <div className="footer">
         <Link to="/" className="footer-images">
           <Home className="image" />
@@ -34,8 +39,8 @@ const Footer: FC<{}> = () => {
         </Link> */}
       </div>
       <Link to="/new-playlist" className="footer-button-wrapper">
-        <div className="footer-button">+</div>
-        <div className="footer-button-lining"></div>
+        <span className="footer-button">+</span>
+        <span className="footer-button-lining" />
       </Link>
     </div>
   );

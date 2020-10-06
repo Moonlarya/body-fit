@@ -89,7 +89,7 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
                 />
                 {errors.name && touched.name && errors.name}
                 <button type="submit" className="primary-button">
-                  Save
+                  Save workout
                 </button>
               </form>
             )}

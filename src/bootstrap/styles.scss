@@ -76,6 +76,23 @@ h2 {
   border: 0;
   padding: 10px 20px;
   margin: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.secondary-button {
+  color: $mortar;
+  font-family: $montserrat;
+  background: linear-gradient(315deg, #d4d1d5, #fdf8fe);
+  box-shadow: -34px -34px 55px #cdcace, 34px 34px 55px #ffffff;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 20px;
+  margin: 10px;
   cursor: pointer;
 
   &:focus {
@@ -126,4 +143,25 @@ height: 56vw;*/
 .add-playlist-select {
   width: max-content !important;
   margin: 0 auto;
+}
+
+.justify-center-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ece8ed;
+  box-shadow: inset 8px 8px 16px #cdcace, inset -8px -8px 16px #ffffff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $mortar;
+  border-radius: 10px;
 }

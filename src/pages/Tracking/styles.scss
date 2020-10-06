@@ -1,0 +1,71 @@
+@import "../../bootstrap/fonts.scss";
+@import "../../bootstrap/colors.scss";
+
+.table-section {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin: 50px auto;
+  padding: 20px;
+  position: relative;
+  background: #ece8ed;
+  box-shadow: -8px -8px 16px #cdcace, 8px 8px 16px #ffffff;
+  border-radius: 10px;
+
+  .overlay {
+    background: rgb(236, 232, 237);
+    background: linear-gradient(
+      90deg,
+      rgba(236, 232, 237, 1) 0%,
+      rgba(215, 215, 215, 0) 20%,
+      rgba(199, 198, 198, 0) 80%,
+      rgba(236, 232, 237, 1) 100%
+    );
+    position: fixed;
+    width: max-content;
+    height: max-content;
+  }
+
+  table {
+    border-spacing: 20px;
+    color: $mortar;
+
+    thead {
+      position: relative;
+      display: block;
+      line-height: 0;
+      tr {
+        th {
+          font-size: $middle;
+          font-weight: $bold;
+          text-transform: uppercase;
+          position: fixed;
+        }
+      }
+    }
+    tbody {
+      th {
+        font-size: $middle;
+      }
+      tr {
+        td {
+          padding: 4px 13px;
+          background: linear-gradient(315deg, #d4d1d5, #fdf8fe);
+          box-shadow: -34px -34px 55px #cdcace, 34px 34px 55px #ffffff;
+          border-radius: 100px;
+
+          &:first-child {
+            background: none;
+            box-shadow: none;
+            background-color: $mishka;
+            border-radius: 0;
+          }
+
+          &.active {
+            background: linear-gradient(145deg, #5a4c5f, #4c4050);
+            box-shadow: 2px 2px 13px #493e4d, 13px 13px 55px #5f5065;
+          }
+        }
+      }
+    }
+  }
+}
