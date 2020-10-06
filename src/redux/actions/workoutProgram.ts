@@ -61,7 +61,8 @@ export const loadDataFromProgramLink = (url: string) => {
       const html = response.data;
       const $ = cheerio.load(html);
 
-      $(".cal-entry").each((i) => {
+      // eslint-disable-next-line
+      $(".cal-entry").each(function (i) {
         const generalTitle = $(this)
           .children(".info")
           .text()

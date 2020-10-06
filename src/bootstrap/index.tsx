@@ -3,8 +3,9 @@ import React, { FC } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import store from "../redux/store";
+import initStore from "../redux/store";
 
 import {
   AddPlaylist,
@@ -16,23 +17,27 @@ import {
 
 import "./styles.scss";
 
+const { store, persistor } = initStore();
+
 const App: FC<{}> = () => {
   return (
     <Provider store={store}>
-      <div className="main-class">
-        <Router>
-          <Switch>
-            <Route exact path="/" component={AddPlaylist} />
-            <Route path="/new-playlist" component={CreatePlayList} />
-            <Route path="/my-workouts" component={MyWorkouts} />
-            <Route path="/profile" />
-            <Route path="/info" />
-            <Route path="/meals" component={Meals} />
-            <Route path="/tracker" component={Tracking} />
-          </Switch>
-          <Footer />
-        </Router>
-      </div>
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="main-class">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={AddPlaylist} />
+              <Route path="/new-playlist" component={CreatePlayList} />
+              <Route path="/my-workouts" component={MyWorkouts} />
+              <Route path="/profile" />
+              <Route path="/info" />
+              <Route path="/meals" component={Meals} />
+              <Route path="/tracker" component={Tracking} />
+            </Switch>
+            <Footer />
+          </Router>
+        </div>
+      </PersistGate>
     </Provider>
   );
 };

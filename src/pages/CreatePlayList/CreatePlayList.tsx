@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player";
+import { Field, Formik } from "formik";
 
 import addWorkout from "../../redux/actions/ownWorkout";
 
@@ -9,7 +10,7 @@ import DayForm from "./DayForm";
 import { ICreatePlayList, IState, ISavingFormFIelds } from "./types";
 
 class CreatePlayList extends Component<ICreatePlayList, IState> {
-  private static initialValuesForSavingForm: ISavingFormFIelds = {
+  private static initialValues: ISavingFormFIelds = {
     name: "",
   };
 
@@ -23,6 +24,11 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
       workoutDaysData: [...state.workoutDaysData, workoutDayData],
       dayCount: state.dayCount + 1,
     }));
+  };
+
+  onSubmit = (values: ISavingFormFIelds) => {
+    const { workoutDaysData } = this.state;
+    this.props.addWorkout({ name: values.name, data: workoutDaysData });
   };
 
   render() {
@@ -57,6 +63,37 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
               </div>
             ))}
           </div>
+          <Formik
+            initialValues={CreatePlayList.initialValues}
+            onSubmit={this.onSubmit}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form
+                onSubmit={handleSubmit}
+                className="link-form add-playlist-select fixed-center-down"
+              >
+                <Field
+                  className="styled-input"
+                  name="name"
+                  placeholder="Name your workout set"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name && touched.name && errors.name}
+                <button type="submit" className="primary-button">
+                  Save
+                </button>
+              </form>
+            )}
+          </Formik>
         </div>
       </>
     );
