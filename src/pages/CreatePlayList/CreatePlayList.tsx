@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import ReactPlayer from "react-player";
 import { Field, Formik } from "formik";
 
-import addWorkout from "../../redux/actions/ownWorkout";
+import { addWorkout } from "../../redux/actions/ownWorkout";
 
 import DayForm from "./DayForm";
 
-import { ICreatePlayList, IState, ISavingFormFIelds } from "./types";
+import { ICreatePlayList, ISavingFormFIelds } from "./types";
 
 class CreatePlayList extends Component<ICreatePlayList, IState> {
   private static initialValues: ISavingFormFIelds = {

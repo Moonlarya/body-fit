@@ -47,7 +47,7 @@ class DayForm extends React.Component<
     return (
       <>
         <div className="link-form add-playlist-select">
-          <h1>Adding for day {dayNumber}</h1>
+          <h2>Adding for day {dayNumber}</h2>
           <input
             className="styled-input"
             value={urlInput}

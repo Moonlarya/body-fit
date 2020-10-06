@@ -9,3 +9,8 @@ declare interface IWorkout {
   name: string;
   data: IWorkoutDay[];
 }
+
+declare interface IState {
+  dayCount: number;
+  workoutDaysData: IWorkoutDay[];
+}
