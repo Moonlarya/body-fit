@@ -52,7 +52,10 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                 onSubmit={handleSubmit}
                 className="link-form add-playlist-select"
               >
-                {ownWorkout && (
+                {!ownWorkout.length && (
+                  <p className="subtitle">{t("MyWorkouts.404")}</p>
+                )}
+                {ownWorkout.length && (
                   <>
                     <select
                       className="styled-input"
@@ -73,12 +76,9 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                     </select>
                     {errors.name && touched.name && errors.name}
                     <button type="submit" className="primary-button">
-                      {t("AddPlaylist.go_button")}Go!
+                      {t("AddPlaylist.go_button")}
                     </button>
                   </>
-                )}
-                {!ownWorkout && (
-                  <p className="subtitle">{t("MyWorkouts.404")}</p>
                 )}
               </form>
             )}

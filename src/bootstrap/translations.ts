@@ -96,14 +96,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en", // use en if detected lng is not available
-
-    saveMissing: true, // send not translated keys to endpoint
-
-    // keySeparator: false, // we do not use keys in form messages.welcome
-
+    fallbackLng: "en",
+    saveMissing: true,
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 
