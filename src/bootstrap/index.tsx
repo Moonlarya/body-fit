@@ -24,7 +24,7 @@ const App: FC<{}> = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="main-class">
-          <Router basename={process.env.PUBLIC_URL}>
+          <Router>
             <Switch>
               <Route exact path="/" component={AddPlaylist} />
               <Route exact path="/new-playlist" component={CreatePlayList} />
