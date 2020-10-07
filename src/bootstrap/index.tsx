@@ -33,6 +33,7 @@ const App: FC<{}> = () => {
               <Route path="/info" />
               <Route path="/meals" component={Meals} />
               <Route path="/tracker" component={Tracking} />
+              <Route component={() => <div>404 Not found </div>} />
             </Switch>
             <Footer />
           </Router>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, Formik } from "formik";
+import { Formik } from "formik";
 import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import ReactPlayer from "react-player";
@@ -51,8 +51,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                 onSubmit={handleSubmit}
                 className="link-form add-playlist-select"
               >
-                <Field
-                  as="select"
+                <select
                   className="styled-input"
                   name="name"
                   placeholder="Choose training"
@@ -65,12 +64,11 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                   </option>
                   {ownWorkout &&
                     ownWorkout.map((el) => (
-                      // eslint-disable-next-line
                       <option value={el.name} key={el.name}>
                         {el.name}
                       </option>
                     ))}
-                </Field>
+                </select>
                 {errors.name && touched.name && errors.name}
                 <button type="submit" className="primary-button">
                   Go!
