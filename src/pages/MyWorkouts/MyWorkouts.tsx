@@ -51,28 +51,36 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                 onSubmit={handleSubmit}
                 className="link-form add-playlist-select"
               >
-                <select
-                  className="styled-input"
-                  name="name"
-                  placeholder="Choose training"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                >
-                  <option value="" selected disabled hidden>
-                    Choose here
-                  </option>
-                  {ownWorkout &&
-                    ownWorkout.map((el) => (
-                      <option value={el.name} key={el.name}>
-                        {el.name}
+                {ownWorkout && (
+                  <>
+                    <select
+                      className="styled-input"
+                      name="name"
+                      placeholder="Choose training"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                    >
+                      <option value="" selected disabled hidden>
+                        Choose here
                       </option>
-                    ))}
-                </select>
-                {errors.name && touched.name && errors.name}
-                <button type="submit" className="primary-button">
-                  Go!
-                </button>
+                      {ownWorkout.map((el) => (
+                        <option value={el.name} key={el.name}>
+                          {el.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.name && touched.name && errors.name}
+                    <button type="submit" className="primary-button">
+                      Go!
+                    </button>
+                  </>
+                )}
+                {!ownWorkout && (
+                  <p className="subtitle">
+                    You haven't create your own workout yet :C
+                  </p>
+                )}
               </form>
             )}
           </Formik>
