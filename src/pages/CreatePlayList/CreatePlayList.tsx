@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactPlayer from "react-player";
 import { Field, Formik } from "formik";
+import { withTranslation } from "react-i18next";
+import compose from "lodash/flowRight";
 
 import { addWorkout } from "../../redux/actions/ownWorkout";
 
@@ -33,19 +35,20 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
 
   render() {
     const { workoutDaysData, dayCount } = this.state;
+    const { t } = this.props;
 
     return (
       <>
-        <h1>Take it yourself!</h1>
-        <p className="subtitle text-center">
-          You can create your own workout program
-        </p>
+        <h1>{t("CreatePlayList.title")}</h1>
+        <p className="subtitle text-center">{t("CreatePlayList.subtitle")}</p>
         <DayForm dayNumber={dayCount + 1} onSave={this.handleAddDay} />
         <div className="wrapper">
           <div className="workout-plan">
             {workoutDaysData.map((el, index) => (
               <div key={el.day}>
-                <h1>Day {el.day}</h1>
+                <h1>
+                  {t("CreatePlayList.day")} {el.day}
+                </h1>
                 <div className="workout-block">
                   {el.workout.map((url) => (
                     <div className="player">
@@ -89,7 +92,7 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
                 />
                 {errors.name && touched.name && errors.name}
                 <button type="submit" className="primary-button">
-                  Save workout
+                  {t("CreatePlayList.save_button")}
                 </button>
               </form>
             )}
@@ -105,4 +108,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { addWorkout };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePlayList);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(CreatePlayList);

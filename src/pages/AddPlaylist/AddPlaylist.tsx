@@ -3,6 +3,8 @@ import ReactPlayer from "react-player";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
+import { withTranslation } from "react-i18next";
+import compose from "lodash/flowRight";
 
 import {
   loadDataFromProgramLink,
@@ -18,6 +20,7 @@ interface IAddPlaylistProps {
   loadDataFromProgramLink: (url: string) => Promise<void>;
   programs: any;
   data: any;
+  t: (key: string) => any;
 }
 
 class AddPlaylist extends Component<IAddPlaylistProps> {
@@ -33,14 +36,14 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
   };
 
   render() {
-    const { programs, data } = this.props;
+    const { programs, data, t } = this.props;
 
     return (
       <>
         <div className="wrapper">
-          <h1>Let's get better!</h1>
+          <h1>{t("AddPlaylist.welcome_title")}</h1>
           <p className="subtitle text-center">
-            Choose workout program and let's start!
+            {t("AddPlaylist.welcome_subtitle")}
           </p>
           <button className="primary-button">Chloe Ting</button>
           <Formik
@@ -68,7 +71,7 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
                   value={values.url}
                 >
                   <option value="" selected disabled hidden>
-                    Choose here
+                    {t("AddPlaylist.select_direction")}
                   </option>
                   {programs.map((el) => (
                     <option value={el.link} key={el.name}>
@@ -78,7 +81,7 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
                 </select>
                 {errors.url && touched.url && errors.url}
                 <button type="submit" className="primary-button">
-                  Go!
+                  {t("AddPlaylist.go_button")}
                 </button>
               </form>
             )}
@@ -114,6 +117,7 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
             </div>
           ))}
         </div>
+        )
       </>
     );
   }
@@ -126,4 +130,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { loadProgramLinks, loadDataFromProgramLink };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPlaylist);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(AddPlaylist);

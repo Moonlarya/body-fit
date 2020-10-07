@@ -5,4 +5,5 @@ export interface ISavingFormFIelds {
 export interface ICreatePlayList {
   addWorkout: (workout: IWorkout) => void;
   ownWorkout: IWorkout[];
+  t: (key: string) => any;
 }

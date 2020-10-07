@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import LazyLoad from "react-lazyload";
 import ReactPlayer from "react-player";
 import { createSelector } from "reselect";
+import { withTranslation } from "react-i18next";
+import compose from "lodash/flowRight";
 
 import { setWorkoutName } from "../../redux/actions/ownWorkout";
 
@@ -11,6 +13,7 @@ interface IMyWorkoutsProps {
   ownWorkout: IWorkout[];
   selectedWorkout: IWorkout;
   setWorkoutName: (name: string) => void;
+  t: (key: string) => any;
 }
 
 const selectedWorkoutSelector = createSelector(
@@ -29,15 +32,13 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
   };
 
   render() {
-    const { ownWorkout, selectedWorkout } = this.props;
+    const { ownWorkout, selectedWorkout, t } = this.props;
 
     return (
       <>
         <div className="wrapper">
-          <h1>Let's build yourself!</h1>
-          <p className="subtitle text-center">
-            Now you can workout with your favourite workouts
-          </p>
+          <h1>{t("MyWorkouts.title")}</h1>
+          <p className="subtitle text-center">{t("MyWorkouts.subtitle")}</p>
           <Formik initialValues={this.initialValues} onSubmit={this.onSubmit}>
             {({
               values,
@@ -62,7 +63,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                       value={values.name}
                     >
                       <option value="" selected disabled hidden>
-                        Choose here
+                        {t("MyWorkouts.choose")}
                       </option>
                       {ownWorkout.map((el) => (
                         <option value={el.name} key={el.name}>
@@ -72,14 +73,12 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                     </select>
                     {errors.name && touched.name && errors.name}
                     <button type="submit" className="primary-button">
-                      Go!
+                      {t("AddPlaylist.go_button")}Go!
                     </button>
                   </>
                 )}
                 {!ownWorkout && (
-                  <p className="subtitle">
-                    You haven't create your own workout yet :C
-                  </p>
+                  <p className="subtitle">{t("MyWorkouts.404")}</p>
                 )}
               </form>
             )}
@@ -90,7 +89,9 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
           <div className="workout-plan">
             {selectedWorkout?.data.map((dayWorkout, index) => (
               <>
-                <h2>DAY {dayWorkout.day}</h2>
+                <h2>
+                  {t("MyWorkouts.day")} {dayWorkout.day}
+                </h2>
                 <div className="workout-block">
                   {dayWorkout.workout.map((workout) => (
                     <div className="player">
@@ -122,4 +123,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { setWorkoutName };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyWorkouts);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(MyWorkouts);
