@@ -52,10 +52,9 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                 onSubmit={handleSubmit}
                 className="link-form add-playlist-select"
               >
-                {!ownWorkout.length && (
+                {!ownWorkout.length ? (
                   <p className="subtitle">{t("MyWorkouts.404")}</p>
-                )}
-                {ownWorkout.length && (
+                ) : (
                   <>
                     <select
                       className="styled-input"
