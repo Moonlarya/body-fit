@@ -27,12 +27,12 @@ const App: FC<{}> = () => {
           <Router basename={process.env.PUBLIC_URL}>
             <Switch>
               <Route exact path="/" component={AddPlaylist} />
-              <Route path="/new-playlist" component={CreatePlayList} />
-              <Route path="/my-workouts" component={MyWorkouts} />
-              <Route path="/profile" />
-              <Route path="/info" />
-              <Route path="/meals" component={Meals} />
-              <Route path="/tracker" component={Tracking} />
+              <Route exact path="/new-playlist" component={CreatePlayList} />
+              <Route exact path="/my-workouts" component={MyWorkouts} />
+              <Route exact path="/profile" />
+              <Route exact path="/info" />
+              <Route exact path="/meals" component={Meals} />
+              <Route exact path="/tracker" component={Tracking} />
               <Route component={() => <div>404 Not found </div>} />
             </Switch>
             <Footer />
