@@ -13,5 +13,5 @@ app.get("/*", (req, res) => {
 
 app.listen(port, () => {
   // eslint-disable-next-line
-  console.log("port is listening");
+  console.log("port is listening " + port);
 });
