@@ -11,11 +11,6 @@ app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "build")));
 
 // eslint-disable-next-line
-app.get("/ping", function (res) {
-  return res.send("pong");
-});
-
-// eslint-disable-next-line
 app.get("/*", function (res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
