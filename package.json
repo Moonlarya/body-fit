@@ -1,6 +1,9 @@
 {
   "name": "body-fit",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "private": true,
   "dependencies": {
     "@types/lodash": "^4.14.161",
@@ -57,7 +60,7 @@
   },
   "scripts": {
     "start-front": "react-scripts start",
-    "start-server": "node server/server.js",
+    "start": "node server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "kill": "npx kill-port 3000",
