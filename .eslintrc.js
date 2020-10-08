@@ -28,6 +28,7 @@ module.exports = {
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react/jsx-filename-extension": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
     "class-methods-use-this": "off",
     "no-useless-constructor": "error",
