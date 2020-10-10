@@ -16,6 +16,7 @@ body {
     margin: 0 auto;
 
     .link-form {
+      max-width: 100%;
       display: flex;
       .styled-input {
         width: 100%;
@@ -125,6 +126,7 @@ height: 56vw;*/
 }
 
 .subtitle {
+  text-align: center;
   color: #727171;
   font-size: $small;
   font-weight: $light;
@@ -138,6 +140,13 @@ height: 56vw;*/
   display: flex;
   width: max-content;
   margin: 0 auto;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-playlist-select {

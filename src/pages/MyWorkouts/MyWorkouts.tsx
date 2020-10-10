@@ -6,6 +6,7 @@ import ReactPlayer from "react-player";
 import { createSelector } from "reselect";
 import { withTranslation } from "react-i18next";
 import compose from "lodash/flowRight";
+import { Link } from "react-router-dom";
 
 import { setWorkoutName } from "../../redux/actions/ownWorkout";
 
@@ -35,83 +36,88 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
     const { ownWorkout, selectedWorkout, t } = this.props;
 
     return (
-      <>
-        <div className="wrapper">
-          <h1>{t("MyWorkouts.title")}</h1>
-          <p className="subtitle text-center">{t("MyWorkouts.subtitle")}</p>
-          <Formik initialValues={this.initialValues} onSubmit={this.onSubmit}>
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => (
-              <form
-                onSubmit={handleSubmit}
-                className="link-form add-playlist-select"
-              >
-                {!ownWorkout.length ? (
+      <div className="wrapper">
+        <h1>{t("MyWorkouts.title")}</h1>
+        <p className="subtitle text-center">{t("MyWorkouts.subtitle")}</p>
+        <Formik initialValues={this.initialValues} onSubmit={this.onSubmit}>
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
+            <form
+              onSubmit={handleSubmit}
+              className="link-form add-playlist-select"
+            >
+              {!ownWorkout.length ? (
+                <div className="flex-column">
                   <p className="subtitle">{t("MyWorkouts.404")}</p>
-                ) : (
-                  <>
-                    <select
-                      className="styled-input"
-                      name="name"
-                      placeholder="Choose training"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.name}
-                    >
-                      <option value="" selected disabled hidden>
-                        {t("MyWorkouts.choose")}
-                      </option>
-                      {ownWorkout.map((el) => (
-                        <option value={el.name} key={el.name}>
-                          {el.name}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.name && touched.name && errors.name}
-                    <button type="submit" className="primary-button">
-                      {t("AddPlaylist.go_button")}
+                  <Link to="/new-playlist">
+                    <button className="primary-button">
+                      {t("MyWorkouts.create_button")}
                     </button>
-                  </>
-                )}
-              </form>
-            )}
-          </Formik>
-          <div className="workout-title">
-            <h1>{selectedWorkout?.name}</h1>
-          </div>
-          <div className="workout-plan">
-            {selectedWorkout?.data.map((dayWorkout, index) => (
-              <>
-                <h2>
-                  {t("MyWorkouts.day")} {dayWorkout.day}
-                </h2>
-                <div className="workout-block">
-                  {dayWorkout.workout.map((workout) => (
-                    <div className="player">
-                      <LazyLoad>
-                        <ReactPlayer
-                          // eslint-disable-next-line
-                          key={index}
-                          url={workout}
-                          width="100%"
-                          height="100%"
-                          controls
-                        />
-                      </LazyLoad>
-                    </div>
-                  ))}
+                  </Link>
                 </div>
-              </>
-            ))}
-          </div>
+              ) : (
+                <>
+                  <select
+                    className="styled-input"
+                    name="name"
+                    placeholder="Choose training"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.name}
+                  >
+                    <option value="" selected disabled hidden>
+                      {t("MyWorkouts.choose")}
+                    </option>
+                    {ownWorkout.map((el) => (
+                      <option value={el.name} key={el.name}>
+                        {el.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.name && touched.name && errors.name}
+                  <button type="submit" className="primary-button">
+                    {t("AddPlaylist.go_button")}
+                  </button>
+                </>
+              )}
+            </form>
+          )}
+        </Formik>
+        <div className="workout-title">
+          <h1>{selectedWorkout?.name}</h1>
         </div>
-      </>
+        <div className="workout-plan">
+          {selectedWorkout?.data.map((dayWorkout, index) => (
+            <>
+              <h2>
+                {t("MyWorkouts.day")} {dayWorkout.day}
+              </h2>
+              <div className="workout-block">
+                {dayWorkout.workout.map((workout) => (
+                  <div className="player">
+                    <LazyLoad>
+                      <ReactPlayer
+                        // eslint-disable-next-line
+                        key={index}
+                        url={workout}
+                        width="100%"
+                        height="100%"
+                        controls
+                      />
+                    </LazyLoad>
+                  </div>
+                ))}
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
     );
   }
 }

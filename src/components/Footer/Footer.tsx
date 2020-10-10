@@ -5,8 +5,8 @@ import { ReactComponent as Food } from "../../assets/images/food.svg";
 import { ReactComponent as Workout } from "../../assets/images/workout.svg";
 import { ReactComponent as Home } from "../../assets/images/home.svg";
 import { ReactComponent as Tracker } from "../../assets/images/tracker.svg";
+import { ReactComponent as Favourite } from "../../assets/images/heart.svg";
 // import { ReactComponent as Profile } from "../../assets/images/user.svg";
-// import { ReactComponent as Info } from "../../assets/images/info.svg";
 
 import "./styles.scss";
 
@@ -30,6 +30,9 @@ const Footer: FC<{}> = () => {
         </Link>
         <Link to="/tracker" className="footer-images ">
           <Tracker className="image" />
+        </Link>
+        <Link to="/favourite" className="footer-images">
+          <Favourite className="image" />
         </Link>
         {/* <Link to="/profile" className="footer-images">
           <Profile className="image" />

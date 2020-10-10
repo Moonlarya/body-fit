@@ -14,6 +14,7 @@ import {
   Meals,
   Tracking,
   MyWorkouts,
+  MainPage,
 } from "../pages";
 
 import "./styles.scss";
@@ -27,13 +28,14 @@ const App: FC<{}> = () => {
         <div className="main-class">
           <Router>
             <Switch>
-              <Route exact path="/" component={AddPlaylist} />
+              <Route exact path="/" component={MainPage} />
               <Route exact path="/new-playlist" component={CreatePlayList} />
               <Route exact path="/my-workouts" component={MyWorkouts} />
               <Route exact path="/profile" />
               <Route exact path="/info" />
               <Route exact path="/meals" component={Meals} />
               <Route exact path="/tracker" component={Tracking} />
+              <Route exact path="/favourite" component={AddPlaylist} />
               <Route component={() => <div>404 Not found </div>} />
             </Switch>
             <Footer />

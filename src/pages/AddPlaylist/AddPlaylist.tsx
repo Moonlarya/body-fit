@@ -45,7 +45,6 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
           <p className="subtitle text-center">
             {t("AddPlaylist.welcome_subtitle")}
           </p>
-          <button className="primary-button">Chloe Ting</button>
           <Formik
             initialValues={AddPlaylist.initialValues}
             onSubmit={this.onSubmit}
