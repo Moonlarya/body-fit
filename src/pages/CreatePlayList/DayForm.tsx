@@ -69,7 +69,6 @@ class DayForm extends React.Component<
             </div>
             <div className="d-flex-center">
               {selectedUrls.map((url, index) => (
-                // eslint-disable-next-line
                 <div className="player" key={index}>
                   <ReactPlayer url={url} width="100" height="100" controls />
                 </div>

@@ -45,14 +45,13 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
         <DayForm dayNumber={dayCount + 1} onSave={this.handleAddDay} />
         <div className="wrapper">
           <div className="workout-plan">
-            {workoutDaysData.map((el, index) => (
+            {workoutDaysData.map((el) => (
               <div key={el.day}>
                 <h1>
                   {t("CreatePlayList.day")} {el.day}
                 </h1>
                 <div className="workout-block">
-                  {el.workout.map((url) => (
-                    // eslint-disable-next-line
+                  {el.workout.map((url, index) => (
                     <div className="player" key={index}>
                       <ReactPlayer
                         url={url}

@@ -36,6 +36,7 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off",
     quotes: ["error", "double"],
     "react/prop-types": "off",
+    "react/no-array-index-key": "off",
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
