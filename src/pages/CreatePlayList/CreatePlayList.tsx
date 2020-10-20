@@ -28,9 +28,10 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
     }));
   };
 
-  onSubmit = (values: ISavingFormFIelds) => {
+  onSubmit = async (values: ISavingFormFIelds) => {
+    const { addWorkout } = this.props;
     const { workoutDaysData } = this.state;
-    this.props.addWorkout({ name: values.name, data: workoutDaysData });
+    addWorkout({ name: values.name, data: workoutDaysData });
   };
 
   render() {
@@ -51,10 +52,9 @@ class CreatePlayList extends Component<ICreatePlayList, IState> {
                 </h1>
                 <div className="workout-block">
                   {el.workout.map((url) => (
-                    <div className="player">
+                    // eslint-disable-next-line
+                    <div className="player" key={index}>
                       <ReactPlayer
-                        // eslint-disable-next-line
-                        key={index}
                         url={url}
                         width="100%"
                         height="100%"
