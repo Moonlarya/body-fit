@@ -8,19 +8,20 @@ import { withTranslation } from "react-i18next";
 import compose from "lodash/flowRight";
 import { Link } from "react-router-dom";
 
-import { setWorkoutName } from "../../redux/actions/ownWorkout";
+import { setWorkoutName, loadWorkouts } from "../../redux/actions/ownWorkout";
 
 interface IMyWorkoutsProps {
-  ownWorkout: IWorkout[];
+  createdWorkoutsList: IWorkout[];
   selectedWorkout: IWorkout;
   setWorkoutName: (name: string) => void;
+  loadWorkouts: () => void;
   t: (key: string) => any;
 }
 
 const selectedWorkoutSelector = createSelector(
   (state: any) => state.ownWorkoutPrograms,
   (workouts) =>
-    workouts.ownWorkout.find(
+    workouts.createdWorkoutsList.find(
       (el: IWorkout) => el.name === workouts.selectedWorkoutName
     )
 );
@@ -32,8 +33,13 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
     this.props.setWorkoutName(values.name);
   };
 
+  async componentDidMount() {
+    const { loadWorkouts } = this.props;
+    await loadWorkouts();
+  }
+
   render() {
-    const { ownWorkout, selectedWorkout, t } = this.props;
+    const { createdWorkoutsList, selectedWorkout, t } = this.props;
 
     return (
       <div className="wrapper">
@@ -52,7 +58,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
               onSubmit={handleSubmit}
               className="link-form add-playlist-select"
             >
-              {!ownWorkout.length ? (
+              {!createdWorkoutsList.length ? (
                 <div className="flex-column">
                   <p className="subtitle">{t("MyWorkouts.404")}</p>
                   <Link to="/new-playlist">
@@ -74,7 +80,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                     <option value="" selected disabled hidden>
                       {t("MyWorkouts.choose")}
                     </option>
-                    {ownWorkout.map((el) => (
+                    {createdWorkoutsList.map((el) => (
                       <option value={el.name} key={el.name}>
                         {el.name}
                       </option>
@@ -93,18 +99,16 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
           <h1>{selectedWorkout?.name}</h1>
         </div>
         <div className="workout-plan">
-          {selectedWorkout?.data.map((dayWorkout, index) => (
-            <>
+          {selectedWorkout?.data.map((dayWorkout) => (
+            <div key={+dayWorkout}>
               <h2>
                 {t("MyWorkouts.day")} {dayWorkout.day}
               </h2>
               <div className="workout-block">
-                {dayWorkout.workout.map((workout) => (
-                  <div className="player">
+                {dayWorkout.workout.map((workout, index) => (
+                  <div className="player" key={index}>
                     <LazyLoad>
                       <ReactPlayer
-                        // eslint-disable-next-line
-                        key={index}
                         url={workout}
                         width="100%"
                         height="100%"
@@ -114,7 +118,7 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           ))}
         </div>
       </div>
@@ -122,11 +126,11 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
   }
 }
 const mapStateToProps = (state) => ({
-  ownWorkout: state.ownWorkoutPrograms.ownWorkout,
+  createdWorkoutsList: state.ownWorkoutPrograms.createdWorkoutsList,
   selectedWorkout: selectedWorkoutSelector(state),
 });
 
-const mapDispatchToProps = { setWorkoutName };
+const mapDispatchToProps = { setWorkoutName, loadWorkouts };
 
 export default compose(
   withTranslation(),
