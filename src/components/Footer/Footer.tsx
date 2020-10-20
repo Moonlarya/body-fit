@@ -22,7 +22,7 @@ const Footer: FC<{}> = () => {
         <Link to="/" className="footer-images">
           <Home className="image" />
         </Link>
-        <Link to="/meals" className="footer-images margin-right">
+        <Link to="/meals" className="footer-images">
           <Food className="image" />
         </Link>
         <Link to="/my-workouts" className="footer-images margin-left">
