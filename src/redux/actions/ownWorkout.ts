@@ -1,14 +1,5 @@
-import {
-  CREATE_OWN_PROGRAM,
-  SET_OWN_PROGRAM,
-  LOAD_OWN_WORKOUTS,
-} from "../types";
+import { SET_OWN_PROGRAM, LOAD_OWN_WORKOUTS } from "../types";
 import workoutProgramService from "../../services/workoutProgramService";
-
-export const newWorkout = (workout: IWorkout) => ({
-  type: CREATE_OWN_PROGRAM,
-  payload: workout,
-});
 
 export const setWorkouts = (workouts: IWorkout[]) => ({
   type: LOAD_OWN_WORKOUTS,
@@ -21,9 +12,8 @@ export const setWorkoutName = (workout: string) => ({
 });
 
 export const addWorkout = (workout: IWorkout) => {
-  return async (dispatch) => {
-    const newProgram = await workoutProgramService.create(workout);
-    dispatch(newWorkout(newProgram));
+  return async () => {
+    await workoutProgramService.create(workout);
   };
 };
 
