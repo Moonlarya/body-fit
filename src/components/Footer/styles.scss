@@ -7,6 +7,13 @@
   bottom: 0;
   left: 0;
 
+  .clear-button {
+    width: max-content;
+    padding: 4px;
+    height: max-content;
+    margin-top: 35px;
+  }
+
   .footer {
     height: 90px;
     width: 100%;
@@ -33,7 +40,7 @@
     }
 
     .margin-left {
-      margin-left: 200px;
+      margin-left: 50px;
     }
   }
 

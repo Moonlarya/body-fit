@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
+import ClearCache from "./ClearCache";
+
 import { ReactComponent as Food } from "../../assets/images/food.svg";
 import { ReactComponent as Workout } from "../../assets/images/workout.svg";
 import { ReactComponent as Home } from "../../assets/images/home.svg";
@@ -19,10 +21,11 @@ const Footer: FC<{}> = () => {
       }}
     >
       <div className="footer">
+        <ClearCache />
         <Link to="/" className="footer-images">
           <Home className="image" />
         </Link>
-        <Link to="/meals" className="footer-images">
+        <Link to="/meals" className="footer-images  margin-right">
           <Food className="image" />
         </Link>
         <Link to="/my-workouts" className="footer-images margin-left">
