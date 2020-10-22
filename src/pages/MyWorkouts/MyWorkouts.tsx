@@ -8,17 +8,24 @@ import { withTranslation } from "react-i18next";
 import compose from "lodash/flowRight";
 import { Link } from "react-router-dom";
 
-import { setWorkoutName, loadWorkouts } from "../../redux/actions/ownWorkout";
+import {
+  setWorkoutName,
+  loadWorkouts,
+  setMainOwnWorkout,
+} from "../../redux/actions/ownWorkout";
+import { setMainWorkout } from "../../redux/actions/workoutProgram";
 
 interface IMyWorkoutsProps {
   createdWorkoutsList: IWorkout[];
   selectedWorkout: IWorkout;
   setWorkoutName: (name: string) => void;
+  setMainOwnWorkout: (data) => void;
+  setMainWorkout: (data) => void;
   loadWorkouts: () => void;
   t: (key: string) => any;
 }
 
-const selectedWorkoutSelector = createSelector(
+export const selectedWorkoutSelector = createSelector(
   (state: any) => state.ownWorkoutPrograms,
   (workouts) =>
     workouts.createdWorkoutsList.find(
@@ -33,9 +40,15 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
     this.props.setWorkoutName(values.name);
   };
 
-  async componentDidMount() {
+  setAsMain = () => {
+    const { setMainWorkout, setMainOwnWorkout } = this.props;
+    setMainWorkout(false);
+    setMainOwnWorkout(true);
+  };
+
+  componentDidMount() {
     const { loadWorkouts } = this.props;
-    await loadWorkouts();
+    loadWorkouts();
   }
 
   render() {
@@ -90,11 +103,15 @@ class MyWorkouts extends Component<IMyWorkoutsProps> {
                   <button type="submit" className="primary-button">
                     {t("AddPlaylist.go_button")}
                   </button>
+                  <button className="primary-button" onClick={this.setAsMain}>
+                    {t("MyWorkouts.set_as_main_button")}
+                  </button>
                 </>
               )}
             </form>
           )}
         </Formik>
+
         <div className="workout-title">
           <h1>{selectedWorkout?.name}</h1>
         </div>
@@ -130,7 +147,12 @@ const mapStateToProps = (state) => ({
   selectedWorkout: selectedWorkoutSelector(state),
 });
 
-const mapDispatchToProps = { setWorkoutName, loadWorkouts };
+const mapDispatchToProps = {
+  setWorkoutName,
+  loadWorkouts,
+  setMainOwnWorkout,
+  setMainWorkout,
+};
 
 export default compose(
   withTranslation(),

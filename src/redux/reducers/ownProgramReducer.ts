@@ -1,8 +1,13 @@
-import { SET_OWN_PROGRAM, LOAD_OWN_WORKOUTS } from "../types";
+import {
+  SET_OWN_PROGRAM,
+  LOAD_OWN_WORKOUTS,
+  SET_MAIN_OWN_PROGRAM,
+} from "../types";
 
 const initialState = {
   createdWorkoutsList: [],
   selectedWorkoutName: "",
+  isMain: false,
 };
 
 const ownProgramReducer = (state = initialState, action) => {
@@ -11,6 +16,8 @@ const ownProgramReducer = (state = initialState, action) => {
       return { ...state, createdWorkoutsList: action.payload };
     case SET_OWN_PROGRAM:
       return { ...state, selectedWorkoutName: action.payload };
+    case SET_MAIN_OWN_PROGRAM:
+      return { ...state, isMain: action.payload };
     default:
       return state;
   }

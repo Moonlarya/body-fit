@@ -1,4 +1,8 @@
-import { SET_OWN_PROGRAM, LOAD_OWN_WORKOUTS } from "../types";
+import {
+  SET_OWN_PROGRAM,
+  LOAD_OWN_WORKOUTS,
+  SET_MAIN_OWN_PROGRAM,
+} from "../types";
 import workoutProgramService from "../../services/workoutProgramService";
 
 export const setWorkouts = (workouts: IWorkout[]) => ({
@@ -9,6 +13,11 @@ export const setWorkouts = (workouts: IWorkout[]) => ({
 export const setWorkoutName = (workout: string) => ({
   type: SET_OWN_PROGRAM,
   payload: workout,
+});
+
+export const setMainOwnWorkout = (status) => ({
+  type: SET_MAIN_OWN_PROGRAM,
+  payload: status,
 });
 
 export const addWorkout = (workout: IWorkout) => {

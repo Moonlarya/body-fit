@@ -9,7 +9,9 @@ import compose from "lodash/flowRight";
 import {
   loadDataFromProgramLink,
   loadProgramLinks,
+  setMainWorkout,
 } from "redux/actions/workoutProgram";
+import { setMainOwnWorkout } from "redux/actions/ownWorkout";
 
 interface IFormFields {
   url: string;
@@ -18,6 +20,8 @@ interface IFormFields {
 interface IAddPlaylistProps {
   loadProgramLinks: () => Promise<void>;
   loadDataFromProgramLink: (url: string) => Promise<void>;
+  setMainOwnWorkout: (data) => void;
+  setMainWorkout: (data) => void;
   programs: any;
   data: any;
   t: (key: string) => any;
@@ -33,6 +37,12 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
 
   onSubmit = async (values: IFormFields) => {
     await this.props.loadDataFromProgramLink(values.url);
+  };
+
+  setAsMain = () => {
+    const { setMainWorkout, setMainOwnWorkout } = this.props;
+    setMainWorkout(true);
+    setMainOwnWorkout(false);
   };
 
   render() {
@@ -82,6 +92,9 @@ class AddPlaylist extends Component<IAddPlaylistProps> {
                 <button type="submit" className="primary-button">
                   {t("AddPlaylist.go_button")}
                 </button>
+                <button className="primary-button" onClick={this.setAsMain}>
+                  {t("MyWorkouts.set_as_main_button")}
+                </button>
               </form>
             )}
           </Formik>
@@ -127,7 +140,12 @@ const mapStateToProps = (state) => ({
   data: state.workoutData.data,
 });
 
-const mapDispatchToProps = { loadProgramLinks, loadDataFromProgramLink };
+const mapDispatchToProps = {
+  loadProgramLinks,
+  loadDataFromProgramLink,
+  setMainWorkout,
+  setMainOwnWorkout,
+};
 
 export default compose(
   withTranslation(),

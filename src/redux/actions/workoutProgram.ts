@@ -1,7 +1,11 @@
 import axios from "axios";
 import cheerio from "cheerio";
 
-import { SET_CHLOYA_TING_DATA, SET_CHLOYA_TING_PROGRAMS } from "../types";
+import {
+  SET_CHLOYA_TING_DATA,
+  SET_CHLOYA_TING_PROGRAMS,
+  SET_MAIN_PROGRAM,
+} from "../types";
 
 export const setData = (data) => ({
   type: SET_CHLOYA_TING_DATA,
@@ -11,6 +15,11 @@ export const setData = (data) => ({
 export const setPrograms = (programs) => ({
   type: SET_CHLOYA_TING_PROGRAMS,
   payload: programs,
+});
+
+export const setMainWorkout = (status) => ({
+  type: SET_MAIN_PROGRAM,
+  payload: status,
 });
 
 const BASE_URL = "https://www.chloeting.com/";
